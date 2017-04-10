@@ -8,26 +8,80 @@
 
 import UIKit
 import Twitter
-class TweetTableViewController: UITableViewController {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     var tweets = [[Tweet]]()
-    
+    var searchText: String? = "#stanford"{
+        didSet{
+            lastSuccesfulRequest = nil
+            searchTextField?.text = searchText
+            tweets.removeAll()
+            tableView.reloadData()
+            refresh()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = TwitterRequest(search: "#stanford", count: 50)
-        request.fetchTweets{ (newTweets) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {() -> Void in
-                if newTweets.count > 0 {
-                    self.tweets.insert(newTweets, atIndex: 0)
-                    self.tableView.reloadData()
-                }
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        refresh()
+        
+    }
+
+    func refresh(){
+        if refreshControl != nil {
+            refreshControl?.beginRefreshing()
+        }
+        refresh(refreshControl)
+    }
+
+    // MARK: - Table view data source
+    var lastSuccesfulRequest: TwitterRequest?
+    var nextRequestToAttept: TwitterRequest? {
+        if lastSuccesfulRequest == nil {
+            if searchText != nil {
+                return TwitterRequest(search: searchText!, count: 100)
             }
+            else {
+                return nil
+            }
+        } else {
+            return lastSuccesfulRequest!.requestForNewer
         }
     }
 
-
-    // MARK: - Table view data source
-
+    @IBAction func refresh(sender: UIRefreshControl?) {
+        if searchText != nil {
+            if let request = nextRequestToAttept {
+                request.fetchTweets{ (newTweets) -> Void in
+                    dispatch_async(dispatch_get_main_queue()) {() -> Void in
+                        if newTweets.count > 0 {
+                            self.lastSuccesfulRequest = request
+                            self.tweets.insert(newTweets, atIndex: 0)
+                            self.tableView.reloadData()
+                            sender?.endRefreshing()
+                        }
+                    }
+                }
+            }
+        } else {
+            sender?.endRefreshing()
+        }
+        
+    }
+    @IBOutlet weak var searchTextField: UITextField!{
+        didSet{
+            searchTextField.delegate = self
+            searchTextField.text = searchText
+        }
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == searchTextField{
+            textField.resignFirstResponder()
+            searchText = textField.text
+        }
+        return true
+    }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return tweets.count
     }
@@ -42,12 +96,11 @@ class TweetTableViewController: UITableViewController {
         static let CellReuseIdentifier = "Tweet"
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as TweetTableViewCell
 
-        // Configure the cell...
-        let tweet = tweets[indexPath.section][indexPath.row]
-        cell.textLabel?.text = tweet.text
-        cell.detailTextLabel?.text = tweet.user.name
+       
+        cell.tweet = tweets[indexPath.section][indexPath.row]
+        
         return cell
     }
 
