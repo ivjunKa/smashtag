@@ -56,7 +56,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                 request.fetchTweets{ (newTweets) -> Void in
                     dispatch_async(dispatch_get_main_queue()) {() -> Void in
                         if newTweets.count > 0 {
-                            self.lastSuccesfulRequest = request
+                            //self.lastSuccesfulRequest = request
                             self.tweets.insert(newTweets, atIndex: 0)
                             self.tableView.reloadData()
                             sender?.endRefreshing()

@@ -10,6 +10,14 @@ import UIKit
 import Twitter
 class TweetTableViewCell: UITableViewCell {
     
+    private struct colorsForMentions {
+        static let hashtags = UIColor.redColor()
+        static let url = UIColor.blueColor()
+        static let userMentions = UIColor.purpleColor()
+    }
+    private struct Storyboard {
+        static let CellReuseIdentifier = "Tweet"
+    }
     var tweet: Tweet? {
         didSet{
             updateUI()
@@ -33,6 +41,7 @@ class TweetTableViewCell: UITableViewCell {
                 for _ in tweet.media {
                     tweetTextLabel.text! += " "
                 }
+                tweetTextLabel?.attributedText = setMentionColors(tweet)
             }
             tweetScreenName?.text = "\(tweet.user)"
             if let profileImageURL = tweet.user.profileImageURL {
@@ -40,6 +49,23 @@ class TweetTableViewCell: UITableViewCell {
                     tweetProfileImageView?.image = UIImage(data: imageData)
                 }
             }
+        }
+    }
+    func setMentionColors(tweet: Tweet) -> NSMutableAttributedString {
+        var tweetText: String = tweet.text
+        for _ in tweet.media { tweetText += " "}
+        var attribText = NSMutableAttributedString(string: tweetText)
+        attribText.setKeywordsColor(tweet.hashtags, color: colorsForMentions.hashtags)
+        attribText.setKeywordsColor(tweet.urls, color: colorsForMentions.url)
+        attribText.setKeywordsColor(tweet.userMentions, color: colorsForMentions.userMentions)
+        return attribText
+    }
+    
+}
+private extension NSMutableAttributedString {
+    func setKeywordsColor(keywords: [Tweet.IndexedKeyword], color: UIColor){
+        for keyword in keywords {
+            addAttribute(NSForegroundColorAttributeName, value: color, range: keyword.nsrange)
         }
     }
 }
