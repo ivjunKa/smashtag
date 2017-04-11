@@ -158,14 +158,36 @@ class MentionTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        print("go back to twitter")
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Show Mentions Keywords" :
+                
+                if let ttvc = segue.destinationViewController as? TweetTableViewController {
+                    if let cell = sender as? UITableViewCell {
+                        ttvc.searchText = cell.textLabel?.text
+                    }
+                }
+            default: break
+            }
+        }
+//        if let identifier = segue.identifier {
+//            switch identifier {
+//            case "From Mentions Keyword" :
+//                if let cell = sender as? TweetTableViewCell {
+//                    let mnvc = segue.destinationViewController as MentionTableViewController
+//                    mnvc.tweet = cell.tweet
+//                }
+//            default: break
+//            }
+//        }
     }
-    */
 
 }
