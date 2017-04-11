@@ -34,13 +34,12 @@ class TweetTableViewCell: UITableViewCell {
         tweetTextLabel?.attributedText = nil
         tweetScreenName?.text = nil
         tweetProfileImageView?.image = nil
-        
         if let tweet = self.tweet {
             tweetTextLabel?.text = tweet.text
             if tweetTextLabel?.text != nil {
-                for _ in tweet.media {
-                    tweetTextLabel.text! += " "
-                }
+//                for _ in tweet.media {
+//                    tweetTextLabel.text! += " "
+//                }
                 tweetTextLabel?.attributedText = setMentionColors(tweet)
             }
             tweetScreenName?.text = "\(tweet.user)"
@@ -53,7 +52,7 @@ class TweetTableViewCell: UITableViewCell {
     }
     func setMentionColors(tweet: Tweet) -> NSMutableAttributedString {
         var tweetText: String = tweet.text
-        for _ in tweet.media { tweetText += " "}
+        //for _ in tweet.media { tweetText += " "}
         var attribText = NSMutableAttributedString(string: tweetText)
         attribText.setKeywordsColor(tweet.hashtags, color: colorsForMentions.hashtags)
         attribText.setKeywordsColor(tweet.urls, color: colorsForMentions.url)

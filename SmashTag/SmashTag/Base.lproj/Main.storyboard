@@ -61,6 +61,7 @@
                                     <outlet property="tweetProfileImageView" destination="TDv-Ot-ESN" id="60B-e3-wLG"/>
                                     <outlet property="tweetScreenName" destination="at3-rq-MNA" id="maP-2m-U5T"/>
                                     <outlet property="tweetTextLabel" destination="hdH-MP-sda" id="bVQ-9Y-FIt"/>
+                                    <segue destination="X1i-o9-qFH" kind="show" identifier="Tweet Details" id="d1U-I2-GKX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -83,6 +84,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3c-id-TUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="877" y="261"/>
+        </scene>
+        <!--Mention Table View Controller-->
+        <scene sceneID="r8A-63-kDR">
+            <objects>
+                <tableViewController id="X1i-o9-qFH" customClass="MentionTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ROY-aS-UTN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Keyword Cell" textLabel="p7I-VG-iZ9" style="IBUITableViewCellStyleDefault" id="Uds-R7-5Cc">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uds-R7-5Cc" id="EmL-KJ-yFH">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p7I-VG-iZ9">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image View Cell" rowHeight="213" id="gGc-P6-UrF" customClass="ImageTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gGc-P6-UrF" id="FLa-AU-ZM9">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAI-eF-pKW">
+                                            <rect key="frame" x="1" y="-8" width="600" height="212"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="212" id="545-5k-bK8"/>
+                                                <constraint firstAttribute="width" constant="600" id="l0Y-xf-ObK"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="eAI-eF-pKW" firstAttribute="bottom" secondItem="FLa-AU-ZM9" secondAttribute="bottomMargin" id="OYG-2G-rKj"/>
+                                        <constraint firstItem="eAI-eF-pKW" firstAttribute="leading" secondItem="FLa-AU-ZM9" secondAttribute="leadingMargin" constant="-7" id="bcZ-nW-GEX"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="tweetImage" destination="eAI-eF-pKW" id="T2R-rP-uL3"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="X1i-o9-qFH" id="Xna-iZ-ouW"/>
+                            <outlet property="delegate" destination="X1i-o9-qFH" id="brj-Hn-fxx"/>
+                        </connections>
+                    </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="W8y-Wk-9hd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NcN-uH-Ti2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1725" y="271"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yev-fQ-EAY">
