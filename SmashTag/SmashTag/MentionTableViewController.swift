@@ -169,25 +169,24 @@ class MentionTableViewController: UITableViewController {
         if let identifier = segue.identifier {
             switch identifier {
             case "Show Mentions Keywords" :
-                
                 if let ttvc = segue.destinationViewController as? TweetTableViewController {
                     if let cell = sender as? UITableViewCell {
                         ttvc.searchText = cell.textLabel?.text
+                        if (ttvc.searchText?.hasPrefix("http") != nil){
+                            UIApplication.sharedApplication().openURL(NSURL(string: ttvc.searchText!)!)
+                        }
+                    }
+                }
+            case "Show Image":
+                if let imgvc = segue.destinationViewController as? ImageViewController {
+                    if let cell = sender as? ImageTableViewCell {
+                        imgvc.imageURL = cell.imageUrl
+                        imgvc.title = title
                     }
                 }
             default: break
             }
         }
-//        if let identifier = segue.identifier {
-//            switch identifier {
-//            case "From Mentions Keyword" :
-//                if let cell = sender as? TweetTableViewCell {
-//                    let mnvc = segue.destinationViewController as MentionTableViewController
-//                    mnvc.tweet = cell.tweet
-//                }
-//            default: break
-//            }
-//        }
     }
 
 }
