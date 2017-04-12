@@ -20,6 +20,7 @@
 		F4C8CFAA1E9CCF130079FDF1 /* MentionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8CFA91E9CCF130079FDF1 /* MentionTableViewController.swift */; };
 		F4C8CFAC1E9D127D0079FDF1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8CFAB1E9D127D0079FDF1 /* ImageViewController.swift */; };
 		F4C8CFAE1E9D18E20079FDF1 /* RecentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8CFAD1E9D18E20079FDF1 /* RecentsTableViewController.swift */; };
+		F4C8CFB01E9D192C0079FDF1 /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C8CFAF1E9D192C0079FDF1 /* Recents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		F4C8CFA91E9CCF130079FDF1 /* MentionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionTableViewController.swift; sourceTree = "<group>"; };
 		F4C8CFAB1E9D127D0079FDF1 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		F4C8CFAD1E9D18E20079FDF1 /* RecentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsTableViewController.swift; sourceTree = "<group>"; };
+		F4C8CFAF1E9D192C0079FDF1 /* Recents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				F4C50E8A1E9B8914004705C6 /* LaunchScreen.xib */,
 				F4C50E7F1E9B8914004705C6 /* Supporting Files */,
 				F4C8CFA91E9CCF130079FDF1 /* MentionTableViewController.swift */,
+				F4C8CFAF1E9D192C0079FDF1 /* Recents.swift */,
 			);
 			path = SmashTag;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				F4C8CFA81E9CCB7F0079FDF1 /* ImageTableViewCell.swift in Sources */,
 				F4C50EA81E9B8B52004705C6 /* TweetTableViewController.swift in Sources */,
 				F4C8CFAA1E9CCF130079FDF1 /* MentionTableViewController.swift in Sources */,
+				F4C8CFB01E9D192C0079FDF1 /* Recents.swift in Sources */,
 				F4C8CFAE1E9D18E20079FDF1 /* RecentsTableViewController.swift in Sources */,
 				F4C8CFAC1E9D127D0079FDF1 /* ImageViewController.swift in Sources */,
 				F4C8CFA61E9BC28A0079FDF1 /* TweetTableViewCell.swift in Sources */,

@@ -15,8 +15,10 @@ class MentionTableViewController: UITableViewController {
         didSet {
             title = tweet?.user.screenName
             if let media = tweet?.media  {
-                mentionTypes.append(MentionType(type: "Images",
-                    mentions: media.map { Mention.Image($0.url, $0.aspectRatio) }))
+                if media.count > 0 {
+                    mentionTypes.append(MentionType(type: "Images",
+                        mentions: media.map { Mention.Image($0.url, $0.aspectRatio) }))
+                }
             }
             if let urls = tweet?.urls {
                 if urls.count > 0 {
@@ -25,8 +27,10 @@ class MentionTableViewController: UITableViewController {
                 }
             }
             if let hashtags = tweet?.hashtags{
-                mentionTypes.append(MentionType(type: "Hashtags",
-                    mentions: hashtags.map { Mention.Keyword($0.keyword) }))
+                if hashtags.count > 0 {
+                    mentionTypes.append(MentionType(type: "Hashtags",
+                        mentions: hashtags.map { Mention.Keyword($0.keyword) }))
+                }
             }
             if let users = tweet?.userMentions {
                 var userItems = [Mention.Keyword("@" + tweet!.user.screenName)]

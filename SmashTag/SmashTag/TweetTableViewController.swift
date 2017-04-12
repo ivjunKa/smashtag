@@ -9,7 +9,7 @@
 import UIKit
 import Twitter
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
-    
+    var recents : Recents = Recents()
     var tweets = [[Tweet]]()
     var searchText: String? = "#stanford"{
         didSet{
@@ -52,9 +52,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBAction func refresh(sender: UIRefreshControl?) {
         if searchText != nil {
+            Recents().add(searchText!)
             if let request = nextRequestToAttept {
                 request.fetchTweets{ (newTweets) -> Void in
-                    dispatch_async(dispatch_get_main_queue()) {() -> Void in
+                    let qos = Int(QOS_CLASS_USER_INITIATED.value)
+                    dispatch_async(dispatch_get_global_queue(qos,0)) {() -> Void in
                         if newTweets.count > 0 {
                             //self.lastSuccesfulRequest = request
                             self.tweets.insert(newTweets, atIndex: 0)
